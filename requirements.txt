@@ -1,0 +1,11 @@
+floris==4.6.4
+joblib==1.5.3
+numpy==2.4.4
+pandas==2.3.3
+plotly==6.7.0
+pyproj==3.7.2
+scikit-learn==1.8.0
+scipy==1.17.1
+streamlit==1.56.0
+torch==2.5.1
+pyyaml==6.0.2
