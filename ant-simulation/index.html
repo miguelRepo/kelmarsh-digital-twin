@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulación de colonia de hormigas</title>
+<style>
+  :root {
+    --bg: #101014;
+    --panel: #1a1a22;
+    --text: #d8d8e0;
+    --accent: #e8a33d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 12px;
+    gap: 10px;
+  }
+  h1 { font-size: 18px; font-weight: 600; color: var(--accent); }
+  #wrap { position: relative; }
+  canvas {
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.6);
+    max-width: 100%;
+    height: auto;
+  }
+  #overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,10,14,.55);
+    border-radius: 6px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #7ee08a;
+    text-shadow: 0 2px 8px #000;
+  }
+  #panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    align-items: center;
+    background: var(--panel);
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    max-width: 1280px;
+  }
+  #panel label { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  #panel input[type=range] { width: 110px; accent-color: var(--accent); }
+  #panel button {
+    background: #2a2a36;
+    color: var(--text);
+    border: 1px solid #3a3a4a;
+    border-radius: 4px;
+    padding: 5px 14px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #panel button:hover { background: #343442; }
+  #stats {
+    display: flex;
+    gap: 22px;
+    font-size: 13px;
+    background: var(--panel);
+    padding: 8px 16px;
+    border-radius: 6px;
+  }
+  #stats b { color: var(--accent); }
+</style>
+</head>
+<body>
+  <h1>🐜 Colonia de hormigas — navegación por feromonas</h1>
+
+  <div id="stats">
+    <span>Comida recogida: <b id="stCollected">0</b> / <b id="stTotal">0</b></span>
+    <span>Hormigas: <b id="stAnts">0</b></span>
+    <span>Cargando comida: <b id="stCarrying">0</b></span>
+  </div>
+
+  <div id="wrap">
+    <canvas id="canvas" width="1280" height="800"></canvas>
+    <div id="overlay">🎉 ¡Toda la comida ha sido recogida!</div>
+  </div>
+
+  <div id="panel">
+    <label>Hormigas
+      <input type="range" id="inAnts" min="100" max="2000" step="50" value="800">
+      <span id="lbAnts">800</span>
+    </label>
+    <label>Velocidad
+      <input type="range" id="inSpeed" min="1" max="5" step="1" value="1">
+      <span id="lbSpeed">1×</span>
+    </label>
+    <label>Evaporación
+      <input type="range" id="inEvap" min="0.985" max="0.999" step="0.001" value="0.995">
+      <span id="lbEvap">0.995</span>
+    </label>
+    <label><input type="checkbox" id="inShowHome" checked> Feromona casa (azul)</label>
+    <label><input type="checkbox" id="inShowFood" checked> Feromona comida (roja)</label>
+    <button id="btnPause">⏸ Pausa</button>
+    <button id="btnReset">🔄 Nuevo mapa</button>
+  </div>
+
+  <script src="ants.js"></script>
+</body>
+</html>
