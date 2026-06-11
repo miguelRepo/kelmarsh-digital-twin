@@ -5,13 +5,18 @@ feromonas**, sin conocimiento global del mapa. El comportamiento colectivo
 (rastros, caminos óptimos, abandono de fuentes agotadas) emerge de reglas
 locales muy simples.
 
-## Cómo ejecutarla
+## ▶️ Verla en vivo
 
-Abre `index.html` en cualquier navegador moderno. No necesita servidor ni
+**https://miguelrepo.github.io/ant-colony-simulation/**
+
+Funciona en cualquier navegador moderno, incluido el del celular.
+
+## Cómo ejecutarla en local
+
+Abre `index.html` en cualquier navegador. No necesita servidor ni
 dependencias. Si lo prefieres:
 
 ```bash
-cd ant-simulation
 python3 -m http.server 8000
 # → http://localhost:8000
 ```
