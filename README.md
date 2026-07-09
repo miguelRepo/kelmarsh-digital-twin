@@ -12,15 +12,21 @@ Data: 10-minute SCADA (2020), CC-BY-4.0 by Cubico
 
 ## Setup
 
+Install [uv](https://docs.astral.sh/uv/) if you don't have it, then create
+the environment (uv also fetches Python 3.12 if it's not on the system —
+torch 2.5.1 needs <= 3.12):
+
 ```bash
-# Python 3.12 environment (torch 2.5.1 needs <= 3.12)
+curl -LsSf https://astral.sh/uv/install.sh | sh   # installs to ~/.local/bin
+
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python -r requirements.txt
 ```
 
 ### Data
 
-Download from Zenodo into `data/raw/` (both are git-ignored):
+Download from Zenodo into `data/raw/` (both are git-ignored). The SCADA zip
+is ~475 MB; only the Turbine 1 CSV is needed:
 
 ```bash
 mkdir -p data/raw
@@ -28,7 +34,12 @@ curl -L -o data/raw/Kelmarsh_WT_static.csv \
   'https://zenodo.org/api/records/5841834/files/Kelmarsh_WT_static.csv/content'
 curl -L -o /tmp/kelmarsh_2020.zip \
   'https://zenodo.org/api/records/5841834/files/Kelmarsh_SCADA_2020_3086.zip/content'
+
+# with unzip:
 unzip /tmp/kelmarsh_2020.zip -d data/raw/ 'Turbine_Data_Kelmarsh_1*'
+# or without unzip installed:
+python3 -c "import zipfile; z = zipfile.ZipFile('/tmp/kelmarsh_2020.zip'); \
+  [z.extract(n, 'data/raw/') for n in z.namelist() if 'Kelmarsh_1_' in n]"
 ```
 
 ### Build artifacts
@@ -43,6 +54,9 @@ unzip /tmp/kelmarsh_2020.zip -d data/raw/ 'Turbine_Data_Kelmarsh_1*'
 ```bash
 .venv/bin/streamlit run app.py
 ```
+
+The notebooks under `notebooks/` are exploration artifacts; running them
+additionally requires `jupyter` (not in `requirements.txt`).
 
 ## Project layout
 
