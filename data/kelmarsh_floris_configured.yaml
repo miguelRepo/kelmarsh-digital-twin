@@ -14,7 +14,7 @@ farm:
   - 0.0
   - 393.43306482583284
   - 221.7803474087268
-  turbine_library_path: /home/miguel/Projects/kelmarsh-digital-twin/data/turbine_library
+  turbine_library_path: /home/miguel/projects/kelmarsh-digital-twin/data/turbine_library
   turbine_type:
   - senvion_mm92
   - senvion_mm92

@@ -35,3 +35,10 @@ def load_scada():
 def load_static():
     """Load static turbine layout data (coordinates, hub heights)."""
     return pd.read_csv('data/raw/Kelmarsh_WT_static.csv')
+
+
+@st.cache_resource
+def load_floris():
+    """Build the FLORIS model once per session."""
+    from src.floris_model import build_model
+    return build_model()
