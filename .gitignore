@@ -220,3 +220,6 @@ data/raw/
 data/processed/*.npy
 data/processed/*.csv
 models/
+
+# Claude Code local config
+.claude/
